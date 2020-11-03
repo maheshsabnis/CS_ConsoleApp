@@ -161,7 +161,7 @@ What CLR class contains?
 			- only getter
 	- New Sytax for properties C# 3.0+ 
 		- Property w/o private data member also known as "AUTO-IMPLEMENTED-PROPERTIES"
-		- USe Auto-Implemenetd proeprties fopr creating Data Classes or Entity Classes
+		- USe Auto-Implemenetd proeprties for creating Data Classes or Entity Classes
 		
 4. Events
 
@@ -172,5 +172,98 @@ Exercise with Self Study
 		- Protected Access Specifier
 		- Overloading
 		- Overriding
+			- Day 2: How many times an abstract or virtual method of the base class can be
+					overriden?
+			- Can we have Private or Protected virtual or abstract method?
+			- Can we override Private or Protected virtual or abstract method using public
+				method?
 		- Shadowing
 2. Learn Boxing and UnBoxing
+===========================================================================================
+
+Day 2: 
+
+To support Language Integrated Queries (LINQ) Microsoft have added following features in 
+	C# Programming
+1. Auto-Implemneted Properties
+2. Extension Methods
+3. Lambda Expression
+	- This is a mechanism which 'hides a method implementation(?)' and execute it as 
+		a Binary Expression (?)
+	- Prerequisites
+		- Must know Delegates	
+			- It is a type using which a method can be invoked (called) and executed using its
+				reference
+					- To Execute a method using delegate folloiwng rule must be satisfied
+						- The Delegate Signeture (Input and output parameters) must match
+						with the mathod signeture
+			- This is also used for Performing 'Asynchrnous Operations'in.NET 
+			- Used to declare Events in .NET
+	- If the method accepts 'delegate' as its input parameter, then this method can
+		be passed with Lamdba Expression as input parameter
+
+		- Must know Anonymous Method
+4. Generics
+	- Type-Safe data structures can store specific type of data for specif type instance
+	- Generic Class, Methods, delegates, events, propetris, interfaces, data member
+
+
+
+Extension Methods
+- In Application we may have multiple Sealed classes 
+		- The sealed class can not be inherited or extended
+- Extension methods are those methods which will contain extended functionality for the
+the sealed classes or the classes which you cannot afford to modify.
+- Rules for Creating Extension methods
+	- The class containing extension method must be 'static'
+	- The method to be uses as extension method must be 'static'
+	- The 'first parameter' of the method must be 'this' referred instance of the class	
+		using which the method will be called
+==========================================================================================
+Language Integratyed Query (LINQ)
+1. A Programmable Structure to read data from Collections/Object
+		using Database like Queries
+2. Added by Mictosoft in .NET 3.5 and C# 3.0+
+3. Provide a facility to read data from IEnumerable types (aka Collection types) using
+	 Query Operators
+4. Query Operators are Extension methods for IENumerable interface
+	e.g
+		- Select<T>(Function Predicat aka delegate aka Lambda Expression)
+		- Where<T>(Function Predicat aka delegate aka Lambda Expression)
+		- OrderBy<T>(Function Predicat aka delegate aka Lambda Expression)
+		- OrderByDescending<T>(Function Predicat aka delegate aka Lambda Expression)
+		- GroupBy<T>(Function Predicat aka delegate aka Lambda Expression)
+5. Two types of LINQ Queries
+	- Declaratibe Queries, implemented using Extension Methods
+	- Implerative Queries, implemented using Query Syntax with keyword matching
+		with extension methods
+		e.g. Select method ---> select keyword
+			Where ---> where
+
+
+==========================================================================================
+
+
+Exercise 2: Create an extensoin methods for String class for following Operations
+	1. Find out number of repeatations of the character
+		e.g. str.FindRepeat('f'); --> Return number of time 'f' is occured inn string
+		e.g. Successfuly Implemented feture.
+			- f occures 2 times
+	2. Find out the indexes on which a specific character is present in string
+		e.g. str.FindIndexes('f'); --> return indexes on whihc 'f' occures in string
+			e.g. Successfuly Implemented feture.
+			- f is at 6 and 23
+	3. FInmout number of word ins string
+		 e.g. 	str.FindWords();
+	4. Findout number of statements in staring
+		e.g. str.FindStatements();
+Exercise 3: Self-Study
+	- Understand Generic and take an experience using code to 
+	Create Generic Class, method, interface
+	- UInderstand Interfaces
+		- Take practical experince of 
+			- Creating interface
+			- implement single and multiple interfaces in class
+			- What will happen is a class implement multiple intarfaces and interfaces
+				have same method with same signeture. 
+
