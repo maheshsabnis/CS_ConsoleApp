@@ -36,7 +36,7 @@ namespace CS_EmployeeInfo
             // Adding EMployee object into List i.e.
             // EmployeeDatabase
             db.Add(emp);
-            return db;
+            return db;    
         }
 
         public EmployeeDatabase DeleteEmployee(int empno)
@@ -46,7 +46,7 @@ namespace CS_EmployeeInfo
             // remove the employee from EmployeeDatabase
             db.Remove(emp);
             // return the EmployeeDatabase
-            return db;
+            return db;     
         }
     }
 }
