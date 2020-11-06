@@ -166,6 +166,12 @@ What CLR class contains?
 4. Events
 
 ==========================================================================================
+Collections
+- Each Collection class implements IEnumerbale interface
+- Array is a class that implments IENumerable interface
+- Any array by default bacomes an instance of Array class
+
+===========================================================================================
 Exercise with Self Study
 1. Learn the Inheritance in C#
 	- Explore the following
@@ -219,6 +225,10 @@ the sealed classes or the classes which you cannot afford to modify.
 	- The method to be uses as extension method must be 'static'
 	- The 'first parameter' of the method must be 'this' referred instance of the class	
 		using which the method will be called
+- Every Collectionand Array has an access of extension method declared in Eumumerable class
+ because each collection and Array implements IEnumerable interface
+	- Each collection will access
+		- Select<T>, Where<T>, Order<T>, OtrderBy<T>, extension methods
 ==========================================================================================
 Language Integratyed Query (LINQ)
 1. A Programmable Structure to read data from Collections/Object
@@ -267,3 +277,17 @@ Exercise 3: Self-Study
 			- What will happen is a class implement multiple intarfaces and interfaces
 				have same method with same signeture. 
 
+==========================================================================================
+Exercise 4: Create a C# Comnsole Applicatiom that will manage the Employee Imformation in
+List of Employees and will perform following operations on it
+1. List all EMployees
+2. List All Employees for a Specific Department
+3. Add New Employee
+4. Delete an Employee based on EmpNo
+5. Update a Salary of specifc Employee based on EmpNo
+6. Find Second Max Salaried Employee for each department
+
+Menu Driven App using Swich Case
+
+DEMO Friday
+===========================================================================================
