@@ -291,3 +291,17 @@ Menu Driven App using Swich Case
 
 DEMO Friday
 ===========================================================================================
+Exercise 1 On ADO.NET COnnected Architecture
+Create a menu-driven app for Performing CRUD operations on Dept and Emp Table with
+Following
+1. CRUD on Emp  and Dept tables using Seperate Data Access classes
+2. CReatew a Report class containing  methods for
+	- Get All Employees based on DeptName
+	- Get Employees having Max Salary per department
+	- List all Employees for paying Tax with following rules
+		- Salary between 100000 to 500000 is 15%
+		- Salary between 500001 to 1000000 is 20 %
+		- 30% more than 10L
+		- 0 less than 1L
+
+
