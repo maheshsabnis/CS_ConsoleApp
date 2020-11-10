@@ -35,7 +35,7 @@
 			- COnfiguration for Web Apps
 	- Code Files
 		- Source Code
-========================================================================================
+======================================================================================================
 1. When any class is supposed to be used in the code file, make sure thst, its namespasce(?) 
 is imported in the code file.
 	- Namespace, is a logical collection of classes, related or not related with each othee
