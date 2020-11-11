@@ -113,10 +113,14 @@ namespace CS_ConnectArchi_DML
             Conn.Open();
             Cmd = new SqlCommand(); 
             Cmd.Connection = Conn;
-            
+
             // Comamnd Text is set using the String Interpolation e.g. $"{}".
             // Cmd.CommandText = $"Update Dept set Capacity={dept.Capacity} where DeptNo={dept.DeptNo}";
             // Using Parameterized Query
+
+            // Not Recommended with string concatination
+          //  Cmd.CommandText = "Update Dept Set Capacity=" + dept.Capacity + " where DeptNo=" + dept.DeptNo;
+
             Cmd.CommandText = "Update Dept Set Capacity=@Capacity where DeptNo=@DeptNo";
 
             // Define parameters using SqlParameter class
@@ -155,6 +159,36 @@ namespace CS_ConnectArchi_DML
             int res = Cmd.ExecuteNonQuery();
             Console.WriteLine($"Records deleted {res}");
             Conn.Close();
+        }
+
+
+
+
+        public void UpdateNew(int dno, Dept dept)
+        {
+            try
+            {
+                Conn.Open();
+                Cmd = new SqlCommand();
+                Cmd.Connection = Conn;
+
+                string CommandText = "Update Dept Set DeptName = @DeptName Where DeptNo =@DeptNo";
+                Cmd.Parameters.AddWithValue("@DeptName", dept.DeptName);
+                Cmd.Parameters.AddWithValue("@DeptNo", dept.DeptNo);
+                Cmd.CommandText = CommandText;
+                Cmd.ExecuteNonQuery();
+
+
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error Occured ${ex.Message}");
+            }
+            finally // will always be executed irresective of try or catch
+            { 
+                 Conn.Close();
+            }
         }
     }
 }
