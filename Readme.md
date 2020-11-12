@@ -305,3 +305,12 @@ Following
 		- 0 less than 1L
 
 
+Exercise 2: Create Stored Procedures doe Performing CRUD Operations in Emp and Dept Tables and Execute them using ADO.NET
+
+Exercise 3: Create a Stored Procedute for 
+ List all Employees for paying Tax with following rules
+		- Salary between 100000 to 500000 is 15%
+		- Salary between 500001 to 1000000 is 20 %
+		- 30% more than 10L
+		- 0 less than 1L
+and execute it using ADO.NET
