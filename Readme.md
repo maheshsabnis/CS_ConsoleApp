@@ -305,7 +305,7 @@ Following
 		- 0 less than 1L
 
 
-Exercise 2: Create Stored Procedures doe Performing CRUD Operations in Emp and Dept Tables and Execute them using ADO.NET
+Exercise 2: Create Stored Procedures doe Performing CRUD Operations in Emp and Dept Tables and Execute them using ADO.NET (Immediately)
 
 Exercise 3: Create a Stored Procedute for 
  List all Employees for paying Tax with following rules
