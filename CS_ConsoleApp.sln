@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_ConnectArchi_DML", "CS_C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_StoredProcs", "CS_StoredProcs\CS_StoredProcs.csproj", "{9F4DD514-F92F-49CA-A0C4-4787AFB979EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_ADONET_Disconnected", "CS_ADONET_Disconnected\CS_ADONET_Disconnected.csproj", "{53619761-56AB-4DB6-91AE-BBB9A6155ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{9F4DD514-F92F-49CA-A0C4-4787AFB979EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4DD514-F92F-49CA-A0C4-4787AFB979EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F4DD514-F92F-49CA-A0C4-4787AFB979EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53619761-56AB-4DB6-91AE-BBB9A6155ED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53619761-56AB-4DB6-91AE-BBB9A6155ED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53619761-56AB-4DB6-91AE-BBB9A6155ED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53619761-56AB-4DB6-91AE-BBB9A6155ED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{8BBB4D94-7842-4574-B0D8-E9792D000ECE} = {8E8AF945-DFEC-4BF8-A4DF-2C01F96495AC}
 		{7814BE43-AC37-4792-885C-A48094C0D4A1} = {DD9F857E-1724-488A-9E64-1331E3A8E304}
 		{9F4DD514-F92F-49CA-A0C4-4787AFB979EC} = {DD9F857E-1724-488A-9E64-1331E3A8E304}
+		{53619761-56AB-4DB6-91AE-BBB9A6155ED4} = {DD9F857E-1724-488A-9E64-1331E3A8E304}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBE72403-84D4-4796-9D4E-9F2DD9775EB8}

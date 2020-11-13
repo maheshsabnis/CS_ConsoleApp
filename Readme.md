@@ -314,3 +314,13 @@ Exercise 3: Create a Stored Procedute for
 		- 30% more than 10L
 		- 0 less than 1L
 and execute it using ADO.NET
+
+Exercise 4: Use Disconnected Architecture for following
+1. Create Data and load it from tables from SQL Server Database e.g. Dept, Emp, Person, etc. Display Values in XML
+2. Explore ReadXml() ReadXmlSchema(), WriteXml() and WroteXmlSchema() methods
+3. Generate DataTable, Columns, Rows, and COnstraints usign code. (Create atleast 5 tables)
+4. Week-End Assignment
+	- Create a Table Dept (DeptNo (PK.), DeptName, Location, Capacity) and Emp (EmpNo (P.K.;), EmpName, Designation, Salary,DeptNo (F.K.)),
+	- Write a Stored Procedute for Inserting Records in Employee Table, but make sure that, if the Capacity of Department is already 
+	reached to max e.g. if It department has capacity as 100 and new employee it tried to unsert in Emp table for IT Department, then
+	Stored Proc should return error. Write this login in STored Proc.
