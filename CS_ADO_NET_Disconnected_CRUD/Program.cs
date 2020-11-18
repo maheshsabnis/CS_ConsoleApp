@@ -11,7 +11,7 @@ namespace CS_ADO_NET_Disconnected_CRUD
         static void Main(string[] args)
         {
 
-            DataAccess dataAccess = new DataAccess();
+            // DataAccess dataAccess = new DataAccess();
 
             //var departments = dataAccess.GetDepartments();
             //Console.WriteLine("DeptNo\tDeptName\tLocation\tCapacity");
@@ -33,7 +33,10 @@ namespace CS_ADO_NET_Disconnected_CRUD
             //    Capacity = 90000
             //});
 
-            dataAccess.DeleteDepartment(901);
+            // dataAccess.DeleteDepartment(901);
+
+            DataAccessRelations relations = new DataAccessRelations();
+            relations.SetDataRelation();
 
 
             Console.ReadLine();

@@ -324,3 +324,7 @@ Exercise 4: Use Disconnected Architecture for following
 	- Write a Stored Procedute for Inserting Records in Employee Table, but make sure that, if the Capacity of Department is already 
 	reached to max e.g. if It department has capacity as 100 and new employee it tried to unsert in Emp table for IT Department, then
 	Stored Proc should return error. Write this login in STored Proc.
+
+
+Exercise 5: Use Diconected Archi. to perform CURD Operations on EMp Table.
+=============================================================================================================================================
