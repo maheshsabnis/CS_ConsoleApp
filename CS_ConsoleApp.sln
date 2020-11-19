@@ -43,6 +43,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntityframeworkApps", "Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_EF_Demo_Database_Furst", "CS_EF_Demo_Database_Furst\CS_EF_Demo_Database_Furst.csproj", "{DC4256EF-0E97-4737-8797-72729E0215CE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC_Application", "MVC_Application", "{2094EF09-A472-4A0E-89FD-8E5FFE324D16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVC_Complete_App", "MVC_Complete_App\MVC_Complete_App.csproj", "{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,10 @@ Global
 		{DC4256EF-0E97-4737-8797-72729E0215CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC4256EF-0E97-4737-8797-72729E0215CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC4256EF-0E97-4737-8797-72729E0215CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +125,7 @@ Global
 		{53619761-56AB-4DB6-91AE-BBB9A6155ED4} = {DD9F857E-1724-488A-9E64-1331E3A8E304}
 		{EC9FF9CD-5DD5-4992-AE44-4A6503BAA9D4} = {DD9F857E-1724-488A-9E64-1331E3A8E304}
 		{DC4256EF-0E97-4737-8797-72729E0215CE} = {37961DF1-C2FB-4E41-9516-85F9C9049EEC}
+		{8BCB59A8-7B26-45C2-BCEB-EC39F0D471E1} = {2094EF09-A472-4A0E-89FD-8E5FFE324D16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BBE72403-84D4-4796-9D4E-9F2DD9775EB8}

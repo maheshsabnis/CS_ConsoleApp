@@ -50,7 +50,9 @@ namespace CS_EF_Demo_Database_Furst
         public List<Dept> GetData()
         {
             // retuen all departments
+            // the data is stored as Object Collection as Queryable inside the client's memory
             var depts = ctx.Depts.ToList();
+            
             return depts;
         }
 
