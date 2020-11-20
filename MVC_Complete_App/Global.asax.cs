@@ -13,8 +13,13 @@ namespace MVC_Complete_App
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            // register action filters
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            // register the routes to defing URL routing to 
+            // send requests for Controllers and its action methods
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            // To create a build of JavaScript, CSS so that they can load in
+            // browser and execute
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }

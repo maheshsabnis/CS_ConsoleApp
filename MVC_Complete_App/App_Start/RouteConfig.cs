@@ -9,6 +9,15 @@ namespace MVC_Complete_App
 {
     public class RouteConfig
     {
+        /// <summary>
+        /// Method that will create route template as 
+        /// {controller}/{action}/{id}
+        /// {controller}, Controller name (without th word controlle e.g. CategoryController)
+        /// the {controller} will be Category
+        /// {action}, the action name in the controller
+        /// {id} this is optional, represents the 'id' parameter for the method
+        /// </summary>
+        /// <param name="routes"></param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");

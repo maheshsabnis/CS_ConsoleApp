@@ -28,7 +28,7 @@ namespace MVC_Complete_App.Models
         [Required(ErrorMessage ="Base Price is Must")]
         public int BasePrice { get; set; }
         // This is One-to-Many Relationship i.e. One Category Have multiple Products
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 
     public class Product
@@ -56,9 +56,9 @@ namespace MVC_Complete_App.Models
         public string Description { get; set; }
         // This will be generated as Foreign Key when the Database is generated
         [Required(ErrorMessage = "Category id is Must")]
-        [ForeignKey("CategoryRowId")]
+        //[ForeignKey("CategoryRowId")]
         public int CategoryRowId { get; set; }
         // Referential Integrity
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 }
