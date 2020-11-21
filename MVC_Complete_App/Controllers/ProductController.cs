@@ -1,52 +1,62 @@
-﻿using MVC_Complete_App.BizRepositories;
-// import Models and Repository Namespaces
-using MVC_Complete_App.Models;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
+using MVC_Complete_App.Models;
+using MVC_Complete_App.BizRepositories;
 
 namespace MVC_Complete_App.Controllers
 {
-
-    /// <summary>
-    /// Controller class contains Action method.
-    /// By default action methods will be executed with Http Get Request
-    /// To Execute Action Method for Http Post request
-    /// it must be applied with HttpPost attribute
-    /// </summary>
-    public class CategoryController : Controller
+    public class ProductController : Controller
     {
-        // define an instance of CategoryRespository using the constructor
 
+        IBizRepository<Product, int> prdRespository;
         IBizRepository<Category, int> catRepository;
 
-        public CategoryController()
+        public ProductController()
         {
+            prdRespository = new ProductBizRepository();
             catRepository = new CategoryBizRepository();
         }
 
+        // GET: Porduct
+        
 
-        // GET: Category
+        // GET: Product
         /// <summary>
         /// Return List of Categories
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
         {
-            var result = catRepository.GetData();
+            var result = prdRespository.GetData();
             // return View that will display list of Categoeies
             return View(result);
         }
 
         /// <summary>
         /// The method that will used to respond the view 
-        /// for Accepting data for Category
+        /// for Accepting data for Product
         /// </summary>
         /// <returns></returns>
         public ActionResult Create()
         {
-            var result = new Category();
+            // ViewBag is dynamic object thatb is used to pass additional data from 
+            // Action method to View
+            ViewBag.Name = "The View For Creating the New Product";
+            ViewData["Message"] = "Makes Sure that all values you are passing are valid";
+
+            var result = new Product();
+            // List out all Categories and pass it to SelectList object of System.Web.Mvc
+            // ViewBag.CategoryRowId, the CategoryRowId key is selected because, it is present into
+            // Product class. So when the View is submitted, the CategoryRowId value will also be
+            // submitted with Product class.
+            //                                     Collection to be passed, Value that will be selected, value taht will be shown on UI     
+            ViewBag.CategoryRowId = new SelectList(catRepository.GetData(), "CategoryRowId", "SubCategoryName");
+            
             // return a view that will show empty 
-            // category information
+            // Product information
             return View(result);
         }
 
@@ -57,7 +67,7 @@ namespace MVC_Complete_App.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Category data)
+        public ActionResult Create(Product data)
         {
             // Validate the posted model with ModelState property of the Controller base class 
             // This validations will be executed based on Validation rules applied on
@@ -65,12 +75,22 @@ namespace MVC_Complete_App.Controllers
             if (ModelState.IsValid)
             {
                 // then only save the data
-                data = catRepository.Create(data);
+                data = prdRespository.Create(data);
                 // Redirect to the Index Action Method
                 return RedirectToAction("Index");
             }
             // if the model is invalid stay on the same veiw and display
             // Validation errors
+            // Make sure that pass the ViewBag / ViewData agian to view
+            // otherwise the veiw will crash because the CateryRowId on Creaye View
+            // is useing DroDownList to show list og Categories
+
+            // List out all Categories and pass it to SelectList object of System.Web.Mvc
+            // ViewBag.CategoryRowId, the CategoryRowId key is selected because, it is present into
+            // Product class. So when the View is submitted, the CategoryRowId value will also be
+            // submitted with Product class.
+            //                                     Collection to be passed, Value that will be selected, value taht will be shown on UI     
+            ViewBag.CategoryRowId = new SelectList(catRepository.GetData(), "CategoryRowId", "SubCategoryName");
             return View(data);
         }
 
@@ -83,7 +103,7 @@ namespace MVC_Complete_App.Controllers
         public ActionResult Edit(int id)
         {
             // search record
-            var result = catRepository.GetData(id);
+            var result = prdRespository.GetData(id);
             // return view showing the searched record
             return View(result);
         }
@@ -96,11 +116,11 @@ namespace MVC_Complete_App.Controllers
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult Edit(int id, Category data)
+        public ActionResult Edit(int id, Product data)
         {
             if (ModelState.IsValid)
             {
-                catRepository.Update(id, data);
+                prdRespository.Update(id, data);
                 return RedirectToAction("Index");
             }
             return View(data);
@@ -114,38 +134,8 @@ namespace MVC_Complete_App.Controllers
         /// <returns></returns>
         public ActionResult Delete(int id)
         {
-            var result = catRepository.Delete(id);
+            var result = prdRespository.Delete(id);
             return RedirectToAction("Index");
-        }
-
-        /// <summary>
-        /// This method will be used for Asynchronous valdiations
-        /// to check if the CategoryId already presents n database
-        /// Categories table
-        /// </summary>
-        /// <param name="CategoryId"></param>
-        /// <returns></returns>
-        public JsonResult CheckIfCategoryIdExist(int BasePrice)
-        {
-
-
-            if(BasePrice < 0) return Json(false, JsonRequestBehavior.AllowGet);
-            return Json(true, JsonRequestBehavior.AllowGet);
-
-            //// check if the collection contsins any result
-            //var cat = (from c in catRepository.GetData()
-            //           where c.CategoryId == CategoryId
-            //           select c).FirstOrDefault();
-            //if (cat != null)
-            //{
-            //    // CategoryId is already present
-            //    // generate the response with invalid result
-            //    return Json(false, JsonRequestBehavior.AllowGet);
-            //}
-            //// CategoryId is not present
-            //// generate the response with valid result
-            //return Json(true, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.SubCategoryName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.BasePrice)
         </th>
         <th></th>
@@ -38,12 +41,15 @@
         @Html.DisplayFor(modelItem => item.CategoryName)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.SubCategoryName)
+    </td>
+    <td>
         @Html.DisplayFor(modelItem => item.BasePrice)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new {id= item.CategoryRowId }) |
-       
-        @Html.ActionLink("Delete", "Delete", new { id= item.CategoryRowId })
+        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryRowId }) |
+
+        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryRowId })
     </td>
 </tr>
 }

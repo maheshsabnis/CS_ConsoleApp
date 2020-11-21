@@ -48,6 +48,7 @@ namespace MVC_Complete_App.BizRepositories
             {
                 res.CategoryId = entity.CategoryId;
                 res.CategoryName = entity.CategoryName;
+                res.SubCategoryName = entity.SubCategoryName;
                 res.BasePrice = entity.BasePrice;
                 ctx.SaveChanges();
                 return res;

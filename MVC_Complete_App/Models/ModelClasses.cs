@@ -6,6 +6,7 @@
 // e.g. Required, StringLength, RegularExpression, Compare, etc.
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace MVC_Complete_App.Models
 {
@@ -19,13 +20,18 @@ namespace MVC_Complete_App.Models
         
         [Required(ErrorMessage ="Category Id is Must")]
         [StringLength(50, ErrorMessage ="Category Id can be 50 characters max")]
+       
         public string CategoryId { get; set; }
         
         [Required(ErrorMessage = "Category Name is Must")]
         [StringLength(200, ErrorMessage = "Category Name can be 200 characters max")]
         public string CategoryName { get; set; }
-        
+        [Required(ErrorMessage = "Sub Category Name is Must")]
+        [StringLength(200, ErrorMessage = "Sub Category Name can be 200 characters max")]
+        public string SubCategoryName { get; set; }
+
         [Required(ErrorMessage ="Base Price is Must")]
+        [Remote("CheckIfCategoryIdExist", "Category")]
         public int BasePrice { get; set; }
         // This is One-to-Many Relationship i.e. One Category Have multiple Products
         public virtual ICollection<Product> Products { get; set; }
@@ -54,6 +60,11 @@ namespace MVC_Complete_App.Models
         [Required(ErrorMessage = "Description is Must")]
         [StringLength(500, ErrorMessage = "Description can be 500 characters max")]
         public string Description { get; set; }
+        [Required(ErrorMessage = "Price is Must")]
+        // apply the custom dataannotation validator
+        [NumericNonNegative(ErrorMessage = "Price cannot be -ve")]
+        public int Price { get; set; }
+
         // This will be generated as Foreign Key when the Database is generated
         [Required(ErrorMessage = "Category id is Must")]
         //[ForeignKey("CategoryRowId")]
