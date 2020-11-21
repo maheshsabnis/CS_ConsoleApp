@@ -125,26 +125,26 @@ namespace MVC_Complete_App.Controllers
         /// </summary>
         /// <param name="CategoryId"></param>
         /// <returns></returns>
-        public JsonResult CheckIfCategoryIdExist(int BasePrice)
+        public JsonResult CheckIfCategoryIdExist(string CategoryId)
         {
 
 
-            if(BasePrice < 0) return Json(false, JsonRequestBehavior.AllowGet);
-            return Json(true, JsonRequestBehavior.AllowGet);
-
-            //// check if the collection contsins any result
-            //var cat = (from c in catRepository.GetData()
-            //           where c.CategoryId == CategoryId
-            //           select c).FirstOrDefault();
-            //if (cat != null)
-            //{
-            //    // CategoryId is already present
-            //    // generate the response with invalid result
-            //    return Json(false, JsonRequestBehavior.AllowGet);
-            //}
-            //// CategoryId is not present
-            //// generate the response with valid result
+            //if(BasePrice < 0) return Json(false, JsonRequestBehavior.AllowGet);
             //return Json(true, JsonRequestBehavior.AllowGet);
+
+            // check if the collection contsins any result
+            var cat = (from c in catRepository.GetData()
+                       where c.CategoryId == CategoryId
+                       select c).FirstOrDefault();
+            if (cat != null)
+            {
+                // CategoryId is already present
+                // generate the response with invalid result
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            // CategoryId is not present
+            // generate the response with valid result
+            return Json(true, JsonRequestBehavior.AllowGet);
 
         }
     }

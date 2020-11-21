@@ -20,7 +20,7 @@ namespace MVC_Complete_App.Models
         
         [Required(ErrorMessage ="Category Id is Must")]
         [StringLength(50, ErrorMessage ="Category Id can be 50 characters max")]
-       
+        [Remote("CheckIfCategoryIdExist", "Category")]
         public string CategoryId { get; set; }
         
         [Required(ErrorMessage = "Category Name is Must")]
@@ -31,7 +31,7 @@ namespace MVC_Complete_App.Models
         public string SubCategoryName { get; set; }
 
         [Required(ErrorMessage ="Base Price is Must")]
-        [Remote("CheckIfCategoryIdExist", "Category")]
+       
         public int BasePrice { get; set; }
         // This is One-to-Many Relationship i.e. One Category Have multiple Products
         public virtual ICollection<Product> Products { get; set; }
