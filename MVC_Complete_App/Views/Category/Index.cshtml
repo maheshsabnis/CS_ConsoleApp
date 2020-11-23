@@ -48,7 +48,7 @@
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.CategoryRowId }) |
-
+        @Html.ActionLink("List Products", "ShowProductsForCategory", new { id=item.CategoryRowId});
         @Html.ActionLink("Delete", "Delete", new { id = item.CategoryRowId })
     </td>
 </tr>

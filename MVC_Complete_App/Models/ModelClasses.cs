@@ -62,7 +62,7 @@ namespace MVC_Complete_App.Models
         public string Description { get; set; }
         [Required(ErrorMessage = "Price is Must")]
         // apply the custom dataannotation validator
-        [NumericNonNegative(ErrorMessage = "Price cannot be -ve")]
+       // [NumericNonNegative(ErrorMessage = "Price cannot be -ve")]
         public int Price { get; set; }
 
         // This will be generated as Foreign Key when the Database is generated

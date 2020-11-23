@@ -21,6 +21,9 @@ namespace MVC_Complete_App
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            // added for enabling Custom Attribute Routes on Controller class
+            // on action method
+            routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
                 name: "Default",

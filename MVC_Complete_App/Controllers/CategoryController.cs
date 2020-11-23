@@ -1,6 +1,7 @@
 ﻿using MVC_Complete_App.BizRepositories;
 // import Models and Repository Namespaces
 using MVC_Complete_App.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -13,6 +14,8 @@ namespace MVC_Complete_App.Controllers
     /// To Execute Action Method for Http Post request
     /// it must be applied with HttpPost attribute
     /// </summary>
+    /// 
+ //   [RoutePrefix("Categories")]
     public class CategoryController : Controller
     {
         // define an instance of CategoryRespository using the constructor
@@ -30,6 +33,8 @@ namespace MVC_Complete_App.Controllers
         /// Return List of Categories
         /// </summary>
         /// <returns></returns>
+        /// 
+        [Route("List")]
         public ActionResult Index()
         {
             var result = catRepository.GetData();
@@ -42,6 +47,8 @@ namespace MVC_Complete_App.Controllers
         /// for Accepting data for Category
         /// </summary>
         /// <returns></returns>
+        /// 
+       // [Route("Category/New")]
         public ActionResult Create()
         {
             var result = new Category();
@@ -53,26 +60,50 @@ namespace MVC_Complete_App.Controllers
         /// <summary>
         /// The Create Action method that will be executed
         /// for the Http Post request
+        /// 
+        /// Exception Handling at Action level using try..catch  block
+        /// Mechanism 1 of handling exception
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult Create(Category data)
         {
-            // Validate the posted model with ModelState property of the Controller base class 
-            // This validations will be executed based on Validation rules applied on
-            // Model classes using Data Annotations
-            if (ModelState.IsValid)
+            try
             {
-                // then only save the data
-                data = catRepository.Create(data);
-                // Redirect to the Index Action Method
-                return RedirectToAction("Index");
+                // Validate the posted model with ModelState property of the Controller base class 
+                // This validations will be executed based on Validation rules applied on
+                // Model classes using Data Annotations
+                if (ModelState.IsValid)
+                {
+                    // if BasePrice is -Ve then throw exception
+                    if (data.BasePrice < 0)
+                        throw new Exception("Price Cannot be -ve");
+
+                    // then only save the data
+                    data = catRepository.Create(data);
+                    // Redirect to the Index Action Method
+                    return RedirectToAction("Index");
+                }
+                // if the model is invalid stay on the same veiw and display
+                // Validation errors
+                return View(data);
             }
-            // if the model is invalid stay on the same veiw and display
-            // Validation errors
-            return View(data);
+            catch (Exception ex)
+            {
+                // handle the exception and return to Error.cshtml
+                // this is a standard error view in Views/Shared folder
+                // this view has a Model class as HandleErrorInfo from System.Web.Mvc     
+                return View("Error", new HandleErrorInfo(
+                        ex,
+                        // controller name
+                        RouteData.Values["controller"].ToString(),
+                        // action name
+                        RouteData.Values["action"].ToString()
+                    ));
+            }
         }
+
 
         /// <summary>
         /// This will accept Http Get Request with the 'id'
@@ -91,6 +122,9 @@ namespace MVC_Complete_App.Controllers
         /// <summary>
         /// Accept the Updated values on view
         /// Validate those values and then send to database
+        /// The edit method raisean exception for BasePrice less than 0
+        /// This exception will be listened by 
+        /// OnException method of the controller class
         /// </summary>
         /// <param name="id"></param>
         /// <param name="data"></param>
@@ -100,10 +134,40 @@ namespace MVC_Complete_App.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (data.BasePrice < 0)
+                    throw new Exception("Base Price Cannot be -ve");
                 catRepository.Update(id, data);
                 return RedirectToAction("Index");
             }
             return View(data);
+        }
+
+        /// <summary>
+        /// Mechanism 2 for handling exception
+        /// </summary>
+        /// <param name="filterContext"></param>
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            // Handle the excpetion to completye the process
+            filterContext.ExceptionHandled = true;
+            // read the exception
+            Exception ex = filterContext.Exception;
+            // set the result property of the ExceptionContrext to the view
+            // which you want to show when exception is raised
+            // Exception information will be passed to View
+            // using ViewDataDictionary
+            ViewDataDictionary viewData = new ViewDataDictionary();
+            viewData["ControllerName"] = filterContext.RouteData.Values["controller"].ToString();
+            viewData["ActionName"] = filterContext.RouteData.Values["action"].ToString();
+            ViewData["Exception"] = ex.Message;
+            // We cannot pass the Model property for ViewResult
+            // because it is read-only
+            filterContext.Result = new ViewResult()
+            { 
+               ViewName = "Error",
+               ViewData = viewData
+            };
         }
 
 
@@ -117,6 +181,17 @@ namespace MVC_Complete_App.Controllers
             var result = catRepository.Delete(id);
             return RedirectToAction("Index");
         }
+
+
+        public ActionResult ShowProductsForCategory(int id)
+        {
+            // stoire sdsata in TempData with K/V Pair
+            TempData["CategoryRowId"] = id;
+          
+            return RedirectToAction("Index", "Product");
+        }
+
+
 
         /// <summary>
         /// This method will be used for Asynchronous valdiations

@@ -8,6 +8,10 @@ using MVC_Complete_App.BizRepositories;
 
 namespace MVC_Complete_App.Controllers
 {
+    /// <summary>
+    /// An Exception Filter Applied on controller class
+    /// </summary>
+    [HandleError(ExceptionType = typeof(Exception), View ="Error")]
     public class ProductController : Controller
     {
 
@@ -30,7 +34,40 @@ namespace MVC_Complete_App.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
-            var result = prdRespository.GetData();
+            List<Product> result = new List<Product>();
+            // Read data from TempData
+            // Check if the TempData has some values 
+            if (TempData.Keys.Count > 0)
+            {
+                // read data from, TempData
+                int CatId = Convert.ToInt32(TempData["CategoryRowId"]);
+                if (CatId > 0)
+                {
+                    // filter data based on CategoryRowId
+                    result = (from prd in prdRespository.GetData()
+                              where prd.CategoryRowId == CatId
+                              select prd).ToList();
+                    // Keep the data for Keys in TempData
+                    TempData.Keep();
+
+                    ViewBag.Message = $"List of Products for Category Row Id {CatId}";
+                    if (result.Count == 0)
+                    {
+                        // there is no Product for the Category Row Id
+                        ViewBag.Message = $"There are no Products for Category Row Id {CatId}";
+                    }
+                  
+                }
+
+            }
+            else
+            {
+                // read all products
+                result = prdRespository.GetData();
+                ViewBag.Message = $"List of All Products";
+            }
+
+              
             // return View that will display list of Categoeies
             return View(result);
         }
@@ -42,6 +79,8 @@ namespace MVC_Complete_App.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
+            var data = TempData["CategoryRowId"];
+
             // ViewBag is dynamic object thatb is used to pass additional data from 
             // Action method to View
             ViewBag.Name = "The View For Creating the New Product";
@@ -63,6 +102,7 @@ namespace MVC_Complete_App.Controllers
         /// <summary>
         /// The Create Action method that will be executed
         /// for the Http Post request
+        /// The exception will be handled by HandleError Filter
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -74,6 +114,7 @@ namespace MVC_Complete_App.Controllers
             // Model classes using Data Annotations
             if (ModelState.IsValid)
             {
+                if (data.Price < 0) throw new Exception("Price Can not be -Ve");
                 // then only save the data
                 data = prdRespository.Create(data);
                 // Redirect to the Index Action Method
