@@ -4,6 +4,7 @@ using MVC_Complete_App.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
+using MVC_Complete_App.CustomFilters;
 
 namespace MVC_Complete_App.Controllers
 {
@@ -16,6 +17,8 @@ namespace MVC_Complete_App.Controllers
     /// </summary>
     /// 
  //   [RoutePrefix("Categories")]
+ // Apply the action filter
+  //  [LogFilter]
     public class CategoryController : Controller
     {
         // define an instance of CategoryRespository using the constructor
@@ -51,6 +54,16 @@ namespace MVC_Complete_App.Controllers
        // [Route("Category/New")]
         public ActionResult Create()
         {
+            // Checvk if the TempData has some values
+            if (TempData.Keys.Count > 0)
+            {
+                // read the Category key from the TempData
+                // and convert (typecast) it into the Category Object
+                Category cat = (Category)TempData["Category"];
+                // return to the View
+                return View(cat);
+            }
+
             var result = new Category();
             // return a view that will show empty 
             // category information
@@ -78,7 +91,11 @@ namespace MVC_Complete_App.Controllers
                 {
                     // if BasePrice is -Ve then throw exception
                     if (data.BasePrice < 0)
+                    {
+                        // store data in TempData
+                        TempData["Category"] = data;
                         throw new Exception("Price Cannot be -ve");
+                    }
 
                     // then only save the data
                     data = catRepository.Create(data);

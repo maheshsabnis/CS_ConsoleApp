@@ -79,8 +79,6 @@ namespace MVC_Complete_App.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            var data = TempData["CategoryRowId"];
-
             // ViewBag is dynamic object thatb is used to pass additional data from 
             // Action method to View
             ViewBag.Name = "The View For Creating the New Product";
@@ -109,6 +107,23 @@ namespace MVC_Complete_App.Controllers
         [HttpPost]
         public ActionResult Create(Product data)
         {
+
+
+            // read the CategoryRowId entered for Product 
+
+            Category cat = new Category();
+            cat.CategoryRowId = data.CategoryRowId;
+            // retrived the BAsePrice of the Category Based on CategoryRowId
+            int basePrice = catRepository.GetData(cat.CategoryRowId).BasePrice;
+            if (data.Price < basePrice)
+            {
+                ViewBag.PriceError = $"Base Price for Category is {basePrice} that is " +
+                      $"greated that price" +
+                      $" you entered. Please enter value greater than equalto the Price.";
+                ViewBag.CategoryRowId = new SelectList(catRepository.GetData(), "CategoryRowId", "SubCategoryName");
+                return View(data);
+            }
+
             // Validate the posted model with ModelState property of the Controller base class 
             // This validations will be executed based on Validation rules applied on
             // Model classes using Data Annotations
