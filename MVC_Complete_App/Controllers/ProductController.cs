@@ -18,14 +18,25 @@ namespace MVC_Complete_App.Controllers
         IBizRepository<Product, int> prdRespository;
         IBizRepository<Category, int> catRepository;
 
-        public ProductController()
+        //public ProductController()
+        //{
+        //    prdRespository = new ProductBizRepository();
+        //    catRepository = new CategoryBizRepository();
+        //}
+
+        /// <summary>
+        /// Injecting the Dependency using Repository Intercace 
+        /// </summary>
+        public ProductController(IBizRepository<Product, int> prdRespository,
+            IBizRepository<Category, int> catRepository)
         {
-            prdRespository = new ProductBizRepository();
-            catRepository = new CategoryBizRepository();
+            this.prdRespository = prdRespository;
+            this.catRepository = catRepository;
         }
 
+
         // GET: Porduct
-        
+
 
         // GET: Product
         /// <summary>

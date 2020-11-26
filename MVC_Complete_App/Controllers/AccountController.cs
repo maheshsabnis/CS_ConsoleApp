@@ -12,20 +12,31 @@ using MVC_Complete_App.Models;
 
 namespace MVC_Complete_App.Controllers
 {
+    /// <summary>
+    /// This controller is used to create Users and provide
+    /// Login Mechanism
+    /// This uses the OWIN framework from Startup class
+    /// </summary>
     [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        // Since we need to use Roles to show on Register Page for creating Used for Role
+        // We have to access Roles property of ApplicationDbContext class
+        private ApplicationDbContext context; 
         public AccountController()
         {
+            this.context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+           
         }
 
         public ApplicationSignInManager SignInManager
@@ -54,6 +65,7 @@ namespace MVC_Complete_App.Controllers
 
         //
         // GET: /Account/Login
+        // This will show the  Login Page
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -63,6 +75,13 @@ namespace MVC_Complete_App.Controllers
 
         //
         // POST: /Account/Login
+        /// <summary>
+        /// This class accespts LoginViewModel class.
+        /// This class contains proeprties for User creation
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -73,6 +92,7 @@ namespace MVC_Complete_App.Controllers
                 return View(model);
             }
 
+            //Process of user login
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -136,14 +156,29 @@ namespace MVC_Complete_App.Controllers
 
         //
         // GET: /Account/Register
+        /// <summary>
+        /// The new User Registration Page
+        /// Pass the LIst of Roles to View using ViewBag / ViewData
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // the select list will pass the Role NAmes to View
+            // from the View select Role Name
+            ViewBag.RoleName = new SelectList(context.Roles.ToList(),"Name", "Name");
             return View();
         }
 
         //
         // POST: /Account/Register
+        /// <summary>
+        ///  This methods accepts the  RegisterViewModel class
+        ///  This class contains properties for User Registartion
+        ///  Modify the method to add user to role
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -152,9 +187,20 @@ namespace MVC_Complete_App.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                // Creates a user
                 var result = await UserManager.CreateAsync(user, model.Password);
+              
+                // if user creattion is successful
                 if (result.Succeeded)
                 {
+                    // once the user creation is successful add role to user
+                    // The first parameter is User Id, this is retrived from 
+                    // ApplicationUser class becasuse this class is derived from
+                    // IdentotyUser class
+                    UserManager.AddToRole(user.Id, model.RoleName);
+
+
+                    // then sign the user
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -165,6 +211,7 @@ namespace MVC_Complete_App.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                // else show user registeration errors 
                 AddErrors(result);
             }
 

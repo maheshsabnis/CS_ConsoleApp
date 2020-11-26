@@ -61,7 +61,10 @@ namespace MVC_Complete_App.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
-
+    /// <summary>
+    /// Add a new Property in this class
+    /// to accept RoleName
+    /// </summary>
     public class RegisterViewModel
     {
         [Required]
@@ -79,6 +82,8 @@ namespace MVC_Complete_App.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public string RoleName { get; set; }
+
     }
 
     public class ResetPasswordViewModel

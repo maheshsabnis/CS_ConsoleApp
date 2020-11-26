@@ -7,6 +7,10 @@ using Microsoft.AspNet.Identity.EntityFramework;
 namespace MVC_Complete_App.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    /// <summary>
+    /// The class taht is used to craete User's Identity
+    /// by making use of UserManagerClass and its CreateIdentityAsync() method
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -18,6 +22,11 @@ namespace MVC_Complete_App.Models
         }
     }
 
+
+    /// <summary>
+    /// The class taht will generate Database with Identity Tables
+    /// E.g. AspNetUsers, AspNetRoles, AspNetUsersInRole, etc.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

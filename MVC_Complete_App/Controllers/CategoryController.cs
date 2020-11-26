@@ -25,10 +25,19 @@ namespace MVC_Complete_App.Controllers
 
         IBizRepository<Category, int> catRepository;
 
-        public CategoryController()
+        //public CategoryController()
+        //{
+        //    catRepository = new CategoryBizRepository();
+        //}
+        /// <summary>
+        /// Inject the depednency by seraching 
+        /// the Object in the Dependency Container using Interface
+        /// </summary>
+        public CategoryController(IBizRepository<Category,int> catRepo)
         {
-            catRepository = new CategoryBizRepository();
+            catRepository = catRepo;
         }
+
 
 
         // GET: Category
@@ -38,6 +47,7 @@ namespace MVC_Complete_App.Controllers
         /// <returns></returns>
         /// 
         [Route("List")]
+        [Authorize(Roles ="Admin,Manager,Clerk")]
         public ActionResult Index()
         {
             var result = catRepository.GetData();
@@ -51,7 +61,12 @@ namespace MVC_Complete_App.Controllers
         /// </summary>
         /// <returns></returns>
         /// 
-       // [Route("Category/New")]
+       // [Route("Category/New")]will be access the create
+       //Only Authorizer users 
+
+    //    [Authorize(Users = "mahesh@msit.com,tejas@msit.com")]
+    // Use roles for Authorization
+    [Authorize(Roles ="Admin,Manager")]
         public ActionResult Create()
         {
             // Checvk if the TempData has some values
@@ -128,6 +143,8 @@ namespace MVC_Complete_App.Controllers
         /// and will search record based on id
         /// </summary>
         /// <returns></returns>
+        /// 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             // search record

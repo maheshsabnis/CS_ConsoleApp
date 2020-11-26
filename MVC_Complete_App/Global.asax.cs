@@ -13,6 +13,9 @@ namespace MVC_Complete_App
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            // Call the UnityConfig to register all depednencies
+            UnityConfig.RegisterComponents();
+
             // register action filters
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             // register the routes to defing URL routing to 
